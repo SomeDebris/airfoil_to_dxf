@@ -11,8 +11,12 @@ struct Config {
 }
 
 fn parse_arguments(args: &[String]) -> Result<Config, &'static str> {
+    if args.len() < 1 {
+        return Err("Not enough arguments!");
+    }
+
     let airfoil_filename = args[1].clone();
-    let output_chord_length: f64 = args[2].clone().parse().unwrap();
+    let output_chord_length: f64 = args[2].clone().parse().expect("Second argument should be a float!");
 
     Ok( Config{ airfoil_filename, output_chord_length } )
 }
