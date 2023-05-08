@@ -1,5 +1,5 @@
 [package]
-name = "Airfoil_to_DXF"
+name = "airfoil_to_dxf"
 version = "0.1.0"
 edition = "2021"
 
