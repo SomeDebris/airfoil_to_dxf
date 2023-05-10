@@ -1,5 +1,6 @@
 use std::env;
 use std::fs;
+use std::process;
 
 fn array_to_dxf() {
         
@@ -36,7 +37,10 @@ fn main() {
 
     let args: Vec<String> = env::args().collect();
     
-    let config = parse_arguments(&args);
+    let config = Config::build(&args).unwrap_or_else(|err| {
+        println!("problem parsing arguments: {err}");
+        process::exit(1);
+    });
 
     let airfoil_file_contents = fs::read_to_string(config.airfoil_filename)
         .expect("Should have been able to read file!");
