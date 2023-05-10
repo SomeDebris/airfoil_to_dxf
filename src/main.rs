@@ -15,8 +15,14 @@ fn parse_arguments(args: &[String]) -> Result<Config, &'static str> {
         return Err("Not enough arguments!");
     }
 
-    let output_chord_length: f64 = if args.len() < 3 { 1.0 } else { 
-        args[2].clone().parse().expect("Second argument should be a float!") };
+    let no_chord_length_given: bool = args.len() < 3;
+
+    if no_chord_length_given {
+        println!("No chord length given. Assuming chord length of 1.");
+    }
+
+    let output_chord_length: f64 = if no_chord_length_given { 1.0 } 
+        else { args[2].clone().parse().expect("Second argument should be a float!") };
 
     let airfoil_filename = args[1].clone();
 
